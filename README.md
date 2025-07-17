@@ -11,7 +11,9 @@
 
 ### 🎮 Overview
 
-Speed Typer is an interactive web-based game designed to help users improve their typing speed and accuracy. Challenge yourself across different difficulty levels, track your scores, and see how you rank on the local leaderboard. (Important note: Application is designed to work on Pc/desktop, keeping in mind the user base, so to use the application, you must be on a desktop setup or if you are using a mobile platform make sure to use external keyboard)
+Speed Typer is an interactive web-based game designed to help users improve their typing speed and accuracy. Challenge yourself across different difficulty levels, track your scores, and see how you rank on the local leaderboard. 
+
+(Important note: Application is designed to work on Pc/desktop, keeping in mind the user base, so to use the application, you must be on a desktop setup or if you are using a mobile platform make sure to use an external keyboard)
 
 ### ✨ Features
 
