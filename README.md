@@ -5,7 +5,7 @@
 ---
 
 **Live Demo:** "https://adepajay.github.io/Tapper-Typing-Speed/index.html"
-*(Remember to replace `yourusername` and `your-repo-name` with your actual GitHub username and repository name after deployment!)*
+
 
 ---
 
@@ -62,6 +62,6 @@ Feel free to reach out if you have any questions, feedback, or just want to conn
 ### 📝 License
 
 This project is open source and available under the [MIT License](https://opensource.org/licenses/MIT).
-*(It's good practice to add a `LICENSE` file in your repository if you haven't already.)*
+
 
 ---
