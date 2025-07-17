@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Scores - Speed Typer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Scoreboard-specific styles that override/complement style.css */
+
+        body {
+            /* These properties are now primarily inherited from style.css,
+               but display/alignment are kept here for the specific layout of this window */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .scoreboard-header {
+            background-color: var(--secondary-color);
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 5px var(--overlay-color);
+            margin-bottom: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .scoreboard-header img {
+            height: 40px;
+            margin-bottom: 10px;
+        }
+
+        .scoreboard-header h1 {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1.8em;
+        }
+
+        #high-scores-list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 20px;
+        }
+
+        #high-scores-list li {
+            background-color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-size: 1.1em;
+        }
+
+        #high-scores-list li span:first-child {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        #high-scores-list li span:last-child {
+            color: var(--gradient-color);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 500px) {
+            .scoreboard-header, #high-scores-list {
+                width: 95%;
+            }
+            #high-scores-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+            #high-scores-list li span:first-child {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scoreboard-header">
+        <img src="tapperW.png" alt="Tapper Logo">
+        <h1>High Scores</h1>
+    </div>
+    <ul id="high-scores-list">
+        </ul>
+
+    <script>
+        // Function to get high scores from localStorage
+        function getHighScores() {
+            const scores = JSON.parse(localStorage.getItem("highScores")) || [];
+            return scores.sort((a, b) => b.score - a.score).slice(0, 10);
+        }
+
+        // Function to display scores
+        function displayScores() {
+            const highScoresList = document.getElementById("high-scores-list");
+            const scores = getHighScores();
+            highScoresList.innerHTML = ""; // Clear previous scores
+
+            if (scores.length === 0) {
+                highScoresList.innerHTML = '<li>No high scores yet! Play a game!</li>';
+            } else {
+                scores.forEach((s, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                        <span>${index + 1}. ${s.name}</span>
+                        <span>${s.score} pts (${s.mode.toUpperCase()}) (${s.date})</span>
+                    `;
+                    highScoresList.appendChild(listItem);
+                });
+            }
+        }
+
+        // Initial display when the window opens
+        displayScores();
+
+        // Automatic update: Refresh scores every 2 seconds
+        setInterval(displayScores, 2000); // Update every 2 seconds
+    </script>
+</body>
+</html>

@@ -15,15 +15,14 @@
 
 body {
   background-color: var(--primary-color);
-  background-image: linear-gradient(315deg, var(--primary-color) 0%, var(--gradient-color) 100%)
-  ;
+  background-image: linear-gradient(315deg, var(--primary-color) 0%, var(--gradient-color) 100%);
   font-family: "Syne Mono", monospace;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stacks navbar and main container vertically */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Aligns content to the top */
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden; /* Prevents horizontal scroll */
   margin: 0;
 }
 
@@ -61,41 +60,63 @@ button:focus, input:focus {
   outline: 0;
 }
 
-.settings-btn {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
+/* Navigation Bar Styling */
+.navbar {
+    width: 100%;
+    background-color: var(--overlay-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between; /* Spaces out logo and links */
+    align-items: center;
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    margin-bottom: 20px; /* Space between navbar and game container */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
-.settings {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--overlay-color);
-  color: var(--text-color);
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(0);
-  transition: transform 0.3s ease-in-out;
+.nav-logo img {
+    height: 40px; /* Adjust logo size in navbar */
+    width: auto;
+    border-radius: var(--border-radius);
 }
 
-.settings.hide {
-  transform: translateY(-100%)
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Main Game Container Adjustments */
 .container {
   background-color: var(--secondary-color);
-  padding: 20px;
+  padding: 30px; /* Increased padding for more internal space */
   border-radius: var(--border-radius);
   box-shadow: 0 3px 5px var(--overlay-color);
   color: var(--text-color);
-  position: relative;
+  position: relative; /* Keeps relative for score/time positioning */
   text-align: center;
-  width: 500px;
-  max-width: 90vw;
+  width: 975px; /* Enlarged width */
+  max-width: 95vw; /* Allows it to take up more of the viewport on larger screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
@@ -104,36 +125,43 @@ h1 {
 
 h2 {
   background-color: var(--overlay-color);
-  padding: 8px;
+  padding: 10px; /* Slightly increased padding */
   border-radius: var(--border-radius);
   margin: 0 0 40px;
+  font-size: 2em; /* Increased heading size */
 }
 
 input {
   border: 0;
   border-radius: var(--border-radius);
-  font-size: 14px;
-  width: 300px;
-  padding: 12px 20px;
-  margin-top: 10px;
+  font-size: 2em; /* Increased font size for typing input */
+  width: 675px; /* Enlarged input width */
+  padding: 15px 25px; /* Increased padding */
+  margin-top: 25px; /* Adjusted margin */
 }
 
+/* Score and Time Containers - Adjusted Top Position and Font Size */
 .score-container {
   position: absolute;
-  top: 60px;
-  right: 20px;
+  top: 95px; /* Adjusted to accommodate larger difficulty selector area and better visual balance */
+  right: 30px; /* Adjusted from 20px due to increased container padding */
+  font-size: 1.3em; /* Increased font size */
+  font-weight: bold;
 }
 
 .time-container {
   position: absolute;
-  top: 60px;
- left: 20px;
+  top: 95px; /* Adjusted to accommodate larger difficulty selector area and better visual balance */
+  left: 30px; /* Adjusted from 20px due to increased container padding */
+  font-size: 1.3em; /* Increased font size */
+  font-weight: bold;
 }
 
+/* End Game Container */
 .end-game-container {
   background-color: inherit;
   border-radius: inherit;
-  display: none;
+  /* Removed 'display: none;' here; controlled by .game-hidden class */
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -143,4 +171,378 @@ input {
   width: 100%;
   height: 100%;
   z-index: 1;
+  font-size: 1.5em; /* Larger text for end game screen */
+}
+.end-game-container h1 {
+    font-size: 2.5em; /* Larger heading */
+    margin-bottom: 20px;
+}
+.end-game-container p {
+    margin-bottom: 30px;
+}
+.end-game-container button {
+    font-size: 1.2em; /* Larger buttons */
+    padding: 12px 20px;
+    margin: 10px;
+}
+
+
+/* Name Input Container Styling */
+#name-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px; /* Slightly increased gap */
+  margin-bottom: 30px; /* Increased margin */
+  margin-top: 30px; /* Increased margin for spacing after difficulty selector */
+}
+
+#name-input-container label {
+    font-size: 1.3em; /* Increased font size */
+    font-weight: bold;
+}
+
+#name-input-container input {
+    margin-top: 0; /* Override default input margin, specific styles above apply */
+    font-size: 1.5em; /* Increased font size for name input */
+    padding: 15px 20px; /* Adjusted padding */
+}
+
+#name-input-container button {
+    font-size: 1.2em; /* Larger button */
+    padding: 12px 25px;
+}
+
+/* Styling for the Difficulty Selector */
+#game-settings {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Slightly increased gap */
+    margin-bottom: 30px; /* Increased space below difficulty selector */
+    background-color: var(--overlay-color);
+    padding: 15px 25px; /* Increased padding */
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+}
+
+#game-settings label {
+    font-weight: bold;
+    font-size: 1.2em; /* Increased font size */
+}
+#game-settings select {
+    font-size: 1.1em; /* Increased font size */
+    padding: 8px; /* Adjusted padding */
+    width: 250px; /* Wider select box */
+}
+
+
+/* Class to control visibility of game elements */
+.game-hidden {
+    display: none !important; /* Forces element to be hidden */
+}
+
+/* Margin adjustments and visual enhancements for game play elements */
+#type-prompt {
+    margin-top: 40px; /* Increased space from difficulty/name input area */
+    font-size: 1.4em; /* Increased font size */
+    color: var(--gradient-color); /* Lighter color for prompt */
+}
+
+#word {
+    margin-top: 25px; /* Increased space between the prompt and the word */
+    font-size: 5em; /* Significantly increased font size for the word */
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+#text {
+    margin-top: 35px; /* Increased space between the word and the input field */
+}
+
+
+/* --- Styles for About & Contact Page --- */
+.content-page {
+  text-align: left; /* Aligns text within about/contact sections to left */
+  padding: 40px; /* Increased padding for more space */
+  max-width: 800px; /* Wider for content pages */
+  margin-top: 30px; /* Space from navbar */
+  margin-bottom: 40px; /* Space before end of body */
+  font-size: 1.1em; /* Base font size for content page paragraphs */
+}
+
+.content-page h2 {
+  text-align: center;
+  margin-bottom: 35px; /* More space below heading */
+  color: var(--primary-color); /* Highlights headings */
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 15px;
+  font-size: 2.5em; /* Larger heading */
+}
+
+.about-section p {
+  line-height: 1.7; /* Increased line height for readability */
+  margin-bottom: 20px; /* More space between paragraphs */
+  font-size: 1.15em; /* Slightly larger paragraph text */
+  color: var(--text-color);
+}
+
+.contact-section {
+  margin-top: 50px; /* More space between about and contact sections */
+  border-top: 1px solid var(--overlay-color);
+  padding-top: 40px; /* More padding above contact content */
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* More space between list items */
+  font-size: 1.2em; /* Larger font for contact items */
+  color: var(--text-color);
+}
+
+.contact-list li i {
+  margin-right: 20px; /* More space for icons */
+  color: var(--primary-color); /* Icon color */
+  font-size: 1.6em; /* Larger icons */
+  width: 30px; /* Fixed width for icons */
+  text-align: center;
+}
+
+.contact-list li strong {
+  margin-right: 15px;
+  min-width: 90px; /* Adjusted to align labels */
+}
+
+.contact-list li a {
+  color: var(--gradient-color); /* Link color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-list li a:hover {
+  color: var(--primary-color);
+}
+
+/* Basic Responsiveness for Navbar and Container (re-evaluated for larger desktop sizes) */
+@media (max-width: 1000px) { /* Adjust breakpoint for larger container */
+    .container {
+        width: 90vw; /* Allow it to shrink on wider tablets */
+        padding: 25px;
+    }
+    input {
+        width: 90%; /* Keep input proportional */
+    }
+    #word {
+        font-size: 4em; /* Scale down word font */
+    }
+    #text {
+        font-size: 1.8em; /* Scale down input font */
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 768px) { /* Tablet breakpoint */
+    .nav-links li {
+        margin-left: 20px;
+    }
+    .container {
+        padding: 20px;
+    }
+    #game-settings {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    #game-settings label {
+        font-size: 1.1em;
+    }
+    #game-settings select {
+        font-size: 1em;
+        width: 200px;
+    }
+    #name-input-container {
+        gap: 15px;
+    }
+    #name-input-container label {
+        font-size: 1.1em;
+    }
+    #name-input-container input {
+        font-size: 1.2em;
+    }
+    #name-input-container button {
+        font-size: 1.1em;
+    }
+    #type-prompt {
+        font-size: 1.2em;
+        margin-top: 30px;
+    }
+    #word {
+        font-size: 3em;
+        margin-top: 20px;
+    }
+    #text {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+    .score-container, .time-container {
+        top: 85px; /* Adjust top for slightly smaller layout */
+        font-size: 1.2em;
+    }
+    .end-game-container {
+        font-size: 1.3em;
+    }
+    .end-game-container h1 {
+        font-size: 2em;
+    }
+    .end-game-container button {
+        font-size: 1.1em;
+    }
+    .content-page {
+        padding: 25px;
+        font-size: 1em;
+    }
+    .content-page h2 {
+        font-size: 2em;
+    }
+    .about-section p {
+        font-size: 1em;
+    }
+    .contact-list li {
+        font-size: 1.1em;
+    }
+    .contact-list li i {
+        font-size: 1.3em;
+    }
+}
+
+/* Add this new CSS to your style.css file */
+
+.next-words-container {
+    margin-top: 15px; /* Space between current word and next words */
+    display: flex; /* Use flex to align next words horizontally */
+    gap: 15px; /* Space between the next words */
+    justify-content: center;
+    align-items: baseline; /* Align by baseline if font sizes are different */
+}
+
+.next-word {
+    font-size: 1.8em; /* Smaller than main word */
+    color: rgba(var(--text-color), 0.7); /* Lighter color */
+    opacity: 0.6; /* Slightly transparent */
+    transition: all 0.2s ease-in-out; /* Smooth transition on word shift */
+    min-width: 100px; /* Give them a minimum width to prevent jumping */
+    text-align: center;
+}
+
+/* Adjustments for the main word's margin to create space for next words */
+#word {
+    margin-top: 25px;
+    margin-bottom: 10px; /* Reduced margin-bottom to pull next words closer */
+    font-size: 5em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Adjust input margin to account for new next-words-container */
+input {
+    margin-top: 25px; /* Adjusted margin between next words and input field */
+}
+
+/* Ensure the .game-hidden class applies to the new container too */
+.next-words-container.game-hidden {
+    display: none !important;
+}
+
+/* You may need to slightly adjust top for score/time if this shifts layout significantly */
+/* Example: .score-container, .time-container { top: 95px; } might become top: 110px; if needed */
+/* Test this in your browser to get the perfect fit */
+.score-container {
+  position: absolute;
+  top: 95px; /* Keep this as is for now, adjust if overlap appears */
+  right: 30px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.time-container {
+  position: absolute;
+  top: 95px; /* Keep this as is for now, adjust if overlap appears */
+  left: 30px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) { /* Mobile breakpoint */
+    .navbar {
+        flex-direction: column;
+        padding: 15px 10px;
+    }
+    .nav-links {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .nav-links li {
+        margin: 5px 0;
+    }
+    .nav-logo img {
+        margin-bottom: 10px;
+    }
+    .container {
+        width: 95vw;
+        padding: 15px;
+    }
+    input {
+        width: 90%;
+    }
+    #type-prompt {
+        font-size: 1em;
+        margin-top: 25px;
+    }
+    #word {
+        font-size: 2.5em;
+        margin-top: 15px;
+    }
+    #text {
+        font-size: 1.2em;
+        margin-top: 15px;
+    }
+    .score-container, .time-container {
+        top: 75px; /* Further adjust top for small screens */
+        font-size: 1em;
+    }
+    .end-game-container {
+        font-size: 1.1em;
+    }
+    .end-game-container h1 {
+        font-size: 1.8em;
+    }
+    .end-game-container button {
+        font-size: 1em;
+    }
+    .content-page {
+        padding: 20px;
+        font-size: 0.95em;
+    }
+    .content-page h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .about-section p {
+        font-size: 0.95em;
+    }
+    .contact-list li {
+        font-size: 1em;
+    }
+    .contact-list li i {
+        font-size: 1.2em;
+    }
 }

@@ -10,36 +10,61 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Speed Typer</title>
+    <title>Tapper by AJ</title>
   </head>
   <body>
-    <button id="settings-btn" class="settings-btn">
-      <i class="fas fa-cog"></i>
-    </button>
-    <div class="settings" id="settings">
-      <form id="settings-form">
-        <label for="difficulty">Difficulty</label>
+    <nav class="navbar">
+      <div class="nav-logo">
+        <img src="tapperW.png" alt="Tapper Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Test Your Speed</a></li>
+        <li><a href="about.html">About & Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div id="game-settings">
+        <label for="difficulty">Difficulty:</label>
         <select id="difficulty">
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
-      </form>
-    </div>
-    <div class="container">
-      <img src="tapper.png" alt="Tapper Logo" class="logo">
-      <small>Type the following:</small>
-      <h1 id="word"></h1>
+      </div>
+
+      <div id="name-input-container">
+        <label for="player-name">Enter Your Name:</label>
+        <input type="text" id="player-name" placeholder="Your Name" />
+        <button id="start-game-btn">Start Game</button>
+      </div>
+
+      <small id="type-prompt" class="game-hidden"
+        >Type the following:</small
+      >
+      <h1 id="word" class="game-hidden"></h1>
+
+      <div class="next-words-container game-hidden">
+        <span id="next-word-1" class="next-word"></span>
+        <span id="next-word-2" class="next-word"></span>
+      </div>
+
       <input
         type="text"
         id="text"
         autocomplete="off"
         placeholder="Type the word here..."
+        class="game-hidden"
       />
-      <p class="time-container">Time left: <span id="time">10s</span></p>
-      <p class="score-container">Score: <span id="score">0</span></p>
-      <div id="end-game-container" class="end-game-container"></div>
+      <p class="time-container game-hidden">
+        Time left: <span id="time">10s</span>
+      </p>
+      <p class="score-container game-hidden">
+        Score: <span id="score">0</span>
+      </p>
+      <div id="end-game-container" class="end-game-container game-hidden"></div>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>
